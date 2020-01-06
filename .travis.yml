@@ -1,21 +1,24 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 cache:
   apt: true
   directories:
-    - node_modules
+  - node_modules
+before_install:
+- composer config --global github-oauth.github.com "$GITHUB_TOKEN"
 install:
-  - npm install # npm ci
+- npm install
 script:
-  - npm run docs:build # npm run docs:build
+- npm run docs:build
 deploy:
   provider: pages
   skip_cleanup: true
   local_dir: docs/.vuepress/dist
-  github_token: $GITHUB_TOKEN # 在 GitHub 中生成，用于允许 Travis 向你的仓库推送代码。在 Travis 的项目设置页面进行配置，设置为 secure variable
+  github_token: "$GITHUB_TOKEN"
   keep_history: true
   on:
     branch: master
 env:
-  - secure: "WJiIc2OvYX1fKKQn5c2bmWSBlYGJwQQ9oLnPgVCoPrF/8kxzPKQOve/jXLc2WMysakYjyOjzAKSO4v5bgO5JTFFIVvv8wMfLz6nRwNvE/3BHLxtgg3T1/eGB08nfwmFWSJMjkTSOeeP2NnnuN6+0A3NqCd5tccddm8rrjnWTpJukjSy6IkMbLD72lyeyfFiPvIChLANezjchBLPAFIepsSVVtzwjpNQan0TjOf78WbTET/FZTivppMsd4hLqNk02d4pz1AYlDl0FdYGc+bHkMl7i3LH7NiUgzcEMLtbDWJJOvGcJlry/ZOvGQbTvazqSU+9nSC3JJpEy5rUQrKP2DoIvi5D90Dh4wAxXLEl1qwgbU4rYEzgy/5ANDAjyVegFHgpPVkrGXV+UwSmZ+5C7Mup76rnX40qkqUwc7XAJ+PdF2AuqE289soI5VzSL8jvvbDI12Q6qNspyd/TfG9knkqiwQcpKs3ZxGV8l0a57HPf0r22ofN/6kCXhZBOscTboNgri/mRpIHBIfLzV5jGZLAzgN9LZ5u7LCORIuZZ+Co/o+7bDDqp0aST3RKk/iCZh1nj0MLwZRvgepXOBjfg1/r2uCOI07ZNG+Kd7gGLXFsoM9PfbYiMLCt13hZfhu0ynjmZra8HOaDNgX/nefMt9XhznuJBFIiQ2eBxPcg73W+s="
+  global:
+    secure: jmIPsoOb5QIvOk5kB4PWFMgvNOXQVqqn+I9sT0Ch/vwdE8Y0v+tW8qk7eiUuRjV+x8u+JgN2TFzkG1WqPlo6MI1a0roOYuF/FHxe+Ph/m5/Qq/iCHhY9lnBPxYDgQPt5wskTw/DuVsgtyzKfZGGVcrcuy4Fwm7iyU61acDXtDkug7gXMHtuhk93TgdqC1hfJiZ+0RIHrJPr8vPplRN2QiWUZ6y+N+jt9B7kjk9lne5mG6aglEcr6WNXeFCzvZFJYgiR1ji1KpzC7iw8XGW4SlSv9m+20x+uqJvgPSianCkHXvOCWFCL7mNbIHHKxrcBn6x8m6YIQDiXNWwGYhY9m44fNYG4wNxghrW1NPT/T8POHHsbsD16XYb/AKViUcJOtfoJrUIcFvEuh9QhqZSOcDF00zYcrGl+pHiMCyzCXludUXaqAmB+vnGtfCB7q3Pp7oCPopYKgTPWn5vOk5NUVBwt2GvamP6t7hi2D20ixKFMQeBjjuJHo0du84HK4Yq1hvJiTM9lVk3/qk99/onUcpmB2H3kpJz0I9q5YShqcnoHllxvMKttmqz+kgHjlpPLEgaXh4JAY6G05Il+6eP4oAIPwLOdQGt+nDXX0QZ+T06BKNF359/FE5F67OAKecvaR68FTq7NcRBwUzv0XIlEVoYeNoVgcELKWXHbcFklr/eA=
